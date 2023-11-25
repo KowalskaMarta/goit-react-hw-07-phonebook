@@ -1,4 +1,3 @@
-// ContactList.js
 import React from 'react';
 import { useSelector } from 'react-redux';
 import css from './ContactList.module.css';
@@ -13,7 +12,7 @@ const ContactList = () => {
     contact.name.toLowerCase().includes(filterValue?.toLowerCase())
   );
 
-  console.log(filterContact)
+  console.log(filterContact);
 
   return (
     <div className={css.contacts}>
@@ -21,12 +20,7 @@ const ContactList = () => {
       {filterContact?.length > 0 ? (
         <ul className={css.contacts__list}>
           {filterContact?.map(({ id, name, number }) => (
-            <ContactListItem
-              key={id}
-              id={id}
-              name={name}
-              number={number}
-            />
+            <ContactListItem key={id} id={id} name={name} number={number} />
           ))}
         </ul>
       ) : (
