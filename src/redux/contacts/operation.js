@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { API_BASE_URL, API_ENDPOINTS } from '#consts/consts';
-
-axios.defaults.baseURL = API_BASE_URL;
+import { API_ENDPOINTS } from '#redux/contacts/consts/consts';
 
 export const getContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -38,6 +36,24 @@ export const deleteContact = createAsyncThunk(
         `${API_ENDPOINTS.CONTACTS}/${contactId}`
       );
 
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateContact = createAsyncThunk(
+  'contacts/updateContact',
+  async (contact, thunkAPI) => {
+    try {
+      const { data } = await axios.patch(
+        `${API_ENDPOINTS.CONTACTS}/${contact.id}`,
+        {
+          name: contact.name,
+          number: contact.number,
+        }
+      );
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

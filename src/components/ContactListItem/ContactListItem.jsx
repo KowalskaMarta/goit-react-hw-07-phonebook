@@ -1,28 +1,44 @@
-
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import css from './ContactListItem.module.css';
-import { deleteContact } from '#services/api';
+import { deleteContact } from '#redux/contacts/operation';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const ContactListItem = ({ id, name, number }) => {
-    console.log(number)
+import { Button } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
+import { ListItem } from '@chakra-ui/react';
+
+export const ContactListItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleDeleteContact = () => {
-    dispatch(deleteContact(id));
+  const editContact = id => {
+    navigate(`${id}/edit`, { state: { from: location } });
   };
 
   return (
-    <li className={css.contacts__item} key={id}>
-      {name} : {number}{' '}
-      <button
-        className={css.contacts__btn}
-        onClick={handleDeleteContact}
-      >
-        Delete
-      </button>
-    </li>
+    <ListItem key={id}>
+      <Box gap="10px">
+        <Button
+          leftIcon={<EditIcon />}
+          colorScheme="red"
+          variant="solid"
+          margin="20px"
+          id={id}
+          onClick={() => editContact(id)}
+        ></Button>
+        <Button
+          leftIcon={<DeleteIcon />}
+          colorScheme="red"
+          variant="solid"
+          marginRight="20px"
+          id={id}
+          onClick={() => dispatch(deleteContact(id))}
+        ></Button>
+        {name} : {number}
+      </Box>
+    </ListItem>
   );
 };
-
-export default ContactListItem;

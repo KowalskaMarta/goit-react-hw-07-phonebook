@@ -1,7 +1,12 @@
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '#services/api';
-import css from './ContactForm.module.css';
+import { addContact } from '#redux/contacts/operation';
+import { PiAddressBook } from "react-icons/pi";
+import { Button } from '@chakra-ui/react';
+import { AddIcon, PhoneIcon } from '@chakra-ui/icons';
+import { Input, InputGroup, InputLeftElement, Box } from '@chakra-ui/react';
+import { FormControl, FormLabel } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 
 export const ContactForm = () => {
   const contacts = useSelector(state => state.contacts.items);
@@ -30,37 +35,62 @@ export const ContactForm = () => {
   };
 
   return (
-    <>
-      <div className={css.form}>
-        <h2 className={css.form__title}>Phonebook</h2>
-        <form className={css.form__form} onSubmit={handleSubmit}>
-          <label className={css.form__label} htmlFor="name">
-            Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            className={css.form__input}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          />
-          <label className={css.form__label} htmlFor="number">
-            Number
-          </label>
-          <input
-            type="tel"
-            name="number"
-            className={css.form__input}
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-          />
-          <button className={css.form__btn} type="submit">
-            Add contact
-          </button>
-        </form>
-      </div>
-    </>
+    <Box
+      backgroundColor="silver"
+      borderRadius="4px"
+      display={'flex'}
+      alignItems="center"
+      justifyContent="center"
+      flexDirection="column"
+      pt={'20px'}
+      pb={'20px'}
+    >
+      <Heading as="h3" size="3xl" noOfLines={1}>
+        Phonebook
+      </Heading>
+
+      <form onSubmit={handleSubmit}>
+        <FormControl display={'flex'} flexDirection={'column'}>
+        <FormLabel marginTop="10px">Name</FormLabel>
+
+        <InputGroup>
+            <InputLeftElement pointerEvents="none" children={<PiAddressBook />} />
+            <Input
+              name="name"
+              type="text"
+              variant="outline"
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+              width={'300px'}
+            />
+          </InputGroup>
+        <FormLabel marginTop="10px">Number</FormLabel>
+
+        <InputGroup>
+            <InputLeftElement pointerEvents="none" children={<PhoneIcon />} />
+            <Input
+              name="number"
+              type="tel"
+              variant="outline"
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+              width={'300px'}
+            />
+          </InputGroup>
+
+        <Button
+          type="submit"
+          leftIcon={<AddIcon />}
+          colorScheme="red"
+          variant="solid"
+          margin="20px"
+        >
+          Add contact
+        </Button>
+        </FormControl>
+      </form>
+    </Box>
   );
 };
