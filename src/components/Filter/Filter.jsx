@@ -1,10 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterContact } from 'redux/contacts/slice/filterSlice';
-import { Input } from '@chakra-ui/react';
-import { Box } from '@chakra-ui/react';
-import { FormControl } from '@chakra-ui/react';
-import { Heading } from '@chakra-ui/react';
+import { filterContact } from 'redux/filterSlice';
+
+import css from './Filter.module.css';
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -14,36 +12,15 @@ export const Filter = () => {
   };
 
   return (
-    <Box
-      backgroundColor="red"
-      borderRadius="4px"
-      display={'flex'}
-      alignItems="center"
-      justifyContent="center"
-      flexDirection="column"
-      pt={'20px'}
-      pb={'20px'}
-    >
-      <FormControl
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        autoComplete="off"
-      >
-        <Heading as="h3" size="2xl" pb={'20px'} noOfLines={1}>
-          Find contacts by name
-        </Heading>
-
-        <Input
-          type="text"
-          name="filter"
-          value={filterValue}
-          onChange={onFilterChange}
-          width={'300px'}
-        />
-        {/* <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} /> */}
-      </FormControl>
-    </Box>
+    <div className={css.filter}>
+      <h2>Find contacts by name</h2>
+      <input
+        type="text"
+        name="filter"
+        value={filterValue}
+        onChange={onFilterChange}
+        className={css.filter__input}
+      ></input>
+    </div>
   );
 };

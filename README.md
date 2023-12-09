@@ -1,6 +1,6 @@
 # Phonebook v6
 
-Phonebook v8 is React application in which we can add contacts. The filter used allows you to search for contacts by name. The delete button allows you to remove added contacts from the list.
+Phonebook v6 is React application in which we can add contacts. The filter used allows you to search for contacts by name. The delete button allows you to remove added contacts from the list.
 
 # Installation
 ## Clone repository:
@@ -22,14 +22,4 @@ npm start
 http://localhost:3000
 
 ## How it should look like?
-### Welcome:
-![App look](./assets/welcome.png)
-
-### Register:
-![App look](./assets/register.png)
-
-### LogIn:
-![App look](./assets/login.png)
-
-### Phonebook:
-![App look](./assets/phonebook.png)
+![App look](./assets/phonebook01.png)
